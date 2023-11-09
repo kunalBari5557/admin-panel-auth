@@ -57,7 +57,7 @@ const SignUp = () => {
         const { token } = actionResult.payload;
         if (token) {
           localStorage.setItem("Token", token);
-          Navigate("/Home");
+          Navigate("/Products");
           toast.dismiss();
           toast.success("Welcome to the dashboard");
         }
@@ -102,6 +102,7 @@ const SignUp = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 5,
+      borderRadius:2
     }}
     elevation={3}>
       <Avatar sx={{ backgroundColor: "#f50057" }}>
@@ -164,7 +165,16 @@ const SignUp = () => {
             />
           )}
         </Grid>
-        <Grid container justifyContent="flex-end" sx={{ marginTop: 2 }}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{ marginTop: 2 }} 
+        >
+          {isSignup ? "Sign Up" : "Sign In"}
+        </Button>
+        <Grid container justifyContent="center" sx={{ marginTop: 2 }}>
           <Grid item>
             <Button onClick={switchMode}>
               {isSignup
@@ -173,15 +183,6 @@ const SignUp = () => {
             </Button>
           </Grid>
         </Grid>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ marginTop: 2 }} // Adjust spacing using Material-UI's spacing system
-        >
-          {isSignup ? "Sign Up" : "Sign In"}
-        </Button>
       </form>
     </Paper>
   </Container>

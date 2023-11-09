@@ -20,7 +20,7 @@ const AddProduct = () => {
     price: "",
     description: "",
     category: "",
-    image: null, // Use null for the initial image value
+    image: null, 
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -51,6 +51,7 @@ const AddProduct = () => {
         .then((result) => {
           if (createProduct.fulfilled.match(result)) {
             setResponse(result.payload.msg);
+            Navigate("/Products");
             setIsSubmitting(false);
             product.resetForm();
           }
