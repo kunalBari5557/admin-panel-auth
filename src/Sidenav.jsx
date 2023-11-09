@@ -18,13 +18,19 @@ import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
 import { SiSimpleanalytics } from "react-icons/si";
 import Shorts from "./components/Shorts";
 import Analytics from "./components/Analytics";
-import { Link, Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import SignUp from "./components/Auth/Auth";
 import LogoutButton from "./components/LogoutButton/LogoutButton";
-import Products from './components/Products/Products';
-import AddProduct from './components/Products/AddProduct';
-import EditProducts from './components/Products/EditProducts';
-import ViewProductDetails from './components/Products/ViewProductDetails';
+import Products from "./components/Products/Products";
+import EditProducts from "./components/Products/EditProducts";
+import ViewProductDetails from "./components/Products/ViewProductDetails";
 
 const drawerWidth = 240;
 
@@ -95,77 +101,87 @@ const Drawer = styled(MuiDrawer, {
 export default function Sidenav() {
   const [open, setOpen] = useState(true);
   const location = useLocation();
+  const tokenState = localStorage.getItem("Token");
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {location.pathname !== "/" && ( 
-        <AppBar position="fixed" elevation={4} sx={{ backgroundColor: "#ffffff", color: "#2f2f2f" }}>
+      {location.pathname !== "/" && (
+        <AppBar
+          position="fixed"
+          elevation={4}
+          sx={{ backgroundColor: "#ffffff", color: "#2f2f2f" }}
+        >
           <Toolbar>
-            <IconButton color="inherit" aria-label="open drawer" onClick={() => setOpen(!open)} edge="start">
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => setOpen(!open)}
+              edge="start"
+            >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
               <img src="./youtube.png" height={40} alt="YouTube Logo" />
             </Typography>
-            <LogoutButton/>
+            <LogoutButton />
           </Toolbar>
         </AppBar>
       )}
-      {location.pathname !== "/" && ( 
+      {location.pathname !== "/" && (
         <Drawer variant="permanent" open={open}>
           <Divider />
           <List sx={{ marginTop: "4rem" }}>
-          <ListItem disablePadding>
+            <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   <AiFillHome />
                 </ListItemIcon>
-                <Link to="/Products" style={{ color: 'black', textDecoration: 'none' }}>Products</Link>
+                <Link
+                  to="/Products"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  Products
+                </Link>
               </ListItemButton>
             </ListItem>
-            {/* <ListItem disablePadding>
+            <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <AiFillHome />
+                  <AiFillVideoCamera />
                 </ListItemIcon>
-                <Link to="/Home" style={{ color: 'black', textDecoration: 'none' }}>Home</Link>
+                <Link
+                  to="/Shorts"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  Shorts
+                </Link>
               </ListItemButton>
-            </ListItem> */}
-            {/* <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                <AiFillVideoCamera />
-              </ListItemIcon>
-              <Link to="/Shorts" style={{ color: 'black', textDecoration: 'none' }}>Shorts</Link>
-            </ListItemButton>
-          </ListItem> */}
-        </List>
-        <Divider />
-        {/* <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SiSimpleanalytics />
-              </ListItemIcon>
-              <Link to="/Analytics" style={{ color: 'black', textDecoration: 'none' }}>Analytics</Link>
-            </ListItemButton>
-          </ListItem>
-        </List> */}
-      </Drawer>
-    )}
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route path="/Products" element={<Products />} />
-        <Route path="products/add" element={<AddProduct />} />
-        <Route path="products/edit" element={<EditProducts />} />
-        <Route path="products/details" element={<ViewProductDetails />} />
-        {/* <Route path="/Home" element={<Home />} /> */}
-        {/* <Route path="/Shorts" element={<Shorts />} /> */}
-        {/* <Route path="/Analytics" element={<Analytics />} /> */}
-      </Routes>
+            </ListItem>
+          </List>
+          <Divider />
+        </Drawer>
+      )}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Routes>
+          {!tokenState ? (
+            <>
+              <Route path="/" element={<SignUp />} />
+              <Route path="*" element={<Navigate to="/" />} />{" "}
+            </>
+          ) : (
+            <>
+              <Route path="/Products" element={<Products />} />
+              <Route path="products/edit" element={<EditProducts />} />
+              <Route path="products/details" element={<ViewProductDetails />} />
+              <Route path="/Shorts" element={<Shorts />} />
+              <Route path="*" element={<Navigate to="/Products" />} />{" "}
+            </>
+          )}
+
+          {/* <Route path="/Analytics" element={<Analytics />} /> */}
+        </Routes>
+      </Box>
     </Box>
-  </Box>
-);
+  );
 }

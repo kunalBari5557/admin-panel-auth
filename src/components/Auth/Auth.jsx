@@ -55,6 +55,7 @@ const SignUp = () => {
         const actionResult = await dispatch(login(values));
 
         const { token } = actionResult.payload;
+        console.log(token);
         if (token) {
           localStorage.setItem("Token", token);
           Navigate("/Products");
@@ -108,11 +109,11 @@ const SignUp = () => {
       <Avatar sx={{ backgroundColor: "#f50057" }}>
         <LockIcon />
       </Avatar>
-      <Typography component="h1" variant="h5" sx={{ textAlign: "center" }}>
+      <Typography component="h1" variant="h5" sx={{ textAlign: "center",marginTop:"1rem" }}>
         {isSignup ? "Sign up" : "Sign in"}
       </Typography>
       <form onSubmit={loginForm.handleSubmit}>
-        <Grid container spacing={2}>
+        <Grid sx={{marginTop:"1rem"}} container spacing={2}>
           {isSignup && (
             <>
               <Input
