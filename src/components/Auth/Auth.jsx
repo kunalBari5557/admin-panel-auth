@@ -55,7 +55,6 @@ const SignUp = () => {
         const actionResult = await dispatch(login(values));
 
         const { token } = actionResult.payload;
-        console.log(token);
         if (token) {
           localStorage.setItem("Token", token);
           Navigate("/Products");

@@ -56,13 +56,10 @@ const Products = () => {
       confirmButtonColor: "#DC3741",
       confirmButtonText: "Delete",
     }).then((result) => {
-      console.log(result);
 
       if (result.isConfirmed === true) {
         dispatch(deleteProductById(productId))
           .then((res) => {
-            console.log("res", res);
-
             if (res?.meta?.requestStatus === "fulfilled") {
               Swal.fire({
                 title: "Deleted Successfully.",

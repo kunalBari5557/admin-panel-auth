@@ -13,7 +13,6 @@ import { useLocation } from "react-router-dom";
 const ViewProductDetails = () => {
   const location = useLocation();
   const stateData = location.state;
-  console.log(stateData);
 
   return (
     <TableContainer component={Paper}>

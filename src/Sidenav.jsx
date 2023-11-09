@@ -31,6 +31,7 @@ import LogoutButton from "./components/LogoutButton/LogoutButton";
 import Products from "./components/Products/Products";
 import EditProducts from "./components/Products/EditProducts";
 import ViewProductDetails from "./components/Products/ViewProductDetails";
+import AddProduct from "./components/Products/AddProduct";
 
 const drawerWidth = 240;
 
@@ -172,14 +173,13 @@ export default function Sidenav() {
           ) : (
             <>
               <Route path="/Products" element={<Products />} />
+              <Route path="products/add" element={<AddProduct />} />
               <Route path="products/edit" element={<EditProducts />} />
               <Route path="products/details" element={<ViewProductDetails />} />
               <Route path="/Shorts" element={<Shorts />} />
               <Route path="*" element={<Navigate to="/Products" />} />{" "}
             </>
           )}
-
-          {/* <Route path="/Analytics" element={<Analytics />} /> */}
         </Routes>
       </Box>
     </Box>

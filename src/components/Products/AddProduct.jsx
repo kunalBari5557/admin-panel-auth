@@ -62,7 +62,6 @@ const AddProduct = () => {
         });
     },
   });
-  console.log("product", product);
 
   return (
     <div style={{ marginTop: "5rem" }}>
