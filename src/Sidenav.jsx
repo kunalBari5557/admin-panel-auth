@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -13,16 +13,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Home from "./components/Home";
 import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
-import { SiSimpleanalytics } from "react-icons/si";
 import Shorts from "./components/Shorts";
-import Analytics from "./components/Analytics";
 import {
   Link,
   Route,
   Routes,
-  useNavigate,
   useLocation,
   Navigate,
 } from "react-router-dom";
@@ -55,14 +51,6 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-}));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -120,7 +108,7 @@ export default function Sidenav() {
               onClick={() => setOpen(!open)}
               edge="start"
             >
-              <MenuIcon />
+              <MenuIcon className="radius_icon" />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
               <img src="./youtube.png" height={40} alt="YouTube Logo" />
@@ -136,7 +124,7 @@ export default function Sidenav() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <AiFillHome />
+                  <AiFillHome className="radius_icon"/>
                 </ListItemIcon>
                 <Link
                   to="/Products"
@@ -149,7 +137,7 @@ export default function Sidenav() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <AiFillVideoCamera />
+                  <AiFillVideoCamera className="radius_icon" />
                 </ListItemIcon>
                 <Link
                   to="/Shorts"
