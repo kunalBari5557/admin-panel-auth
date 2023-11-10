@@ -15,13 +15,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
 import Shorts from "./components/Shorts";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
+import { Link, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import SignUp from "./components/Auth/Auth";
 import LogoutButton from "./components/LogoutButton/LogoutButton";
 import Products from "./components/Products/Products";
@@ -124,7 +118,9 @@ export default function Sidenav() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <AiFillHome className="radius_icon"/>
+                  <Link to="/Products">
+                    <AiFillHome className="radius_icon" />
+                  </Link>
                 </ListItemIcon>
                 <Link
                   to="/Products"
@@ -137,7 +133,9 @@ export default function Sidenav() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <AiFillVideoCamera className="radius_icon" />
+                  <Link to="/Shorts">
+                    <AiFillVideoCamera className="radius_icon" />
+                  </Link>
                 </ListItemIcon>
                 <Link
                   to="/Shorts"
