@@ -15,14 +15,8 @@ const ViewProductDetails = () => {
   const stateData = location.state;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer style={{marginTop:"5rem"}} component={Paper}>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Product Details</TableCell>
-            <TableCell></TableCell> {/* Empty cell for spacing */}
-          </TableRow>
-        </TableHead>
         <TableBody>
           <TableRow>
             <TableCell>
