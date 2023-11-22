@@ -26,6 +26,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { BsFullscreen } from "react-icons/bs";
 import { BsFullscreenExit } from "react-icons/bs";
 import Shorts from "./components/Shorts";
+import PageNotFound from "./common/PageNotFound/PageNotFound";
 
 const drawerWidth = 240;
 
@@ -245,7 +246,7 @@ export default function Sidenav() {
           {!tokenState ? (
             <>
               <Route path="/" element={<SignUp />} />
-              <Route path="*" element={<Navigate to="/" />} />{" "}
+              {/* <Route path="*" element={<Navigate to="/" />} /> */}
             </>
           ) : (
             <>
@@ -254,7 +255,8 @@ export default function Sidenav() {
               <Route path="products/edit" element={<EditProducts />} />
               <Route path="products/details" element={<ViewProductDetails />} />
               <Route path="/Shorts" element={<Shorts />} />
-              <Route path="*" element={<Navigate to="/Products" />} />{" "}
+              <Route path="*" element={<PageNotFound />} /> 
+              {/* <Route path="*" element={<Navigate to="/Products" />} /> */}
             </>
           )}
         </Routes>
