@@ -13,8 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
-import Shorts from "./components/Shorts";
+// import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
 import { Link, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import SignUp from "./components/Auth/Auth";
 import LogoutButton from "./components/LogoutButton/LogoutButton";
@@ -22,6 +21,11 @@ import Products from "./components/Products/Products";
 import EditProducts from "./components/Products/EditProducts";
 import ViewProductDetails from "./components/Products/ViewProductDetails";
 import AddProduct from "./components/Products/AddProduct";
+import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
+import Tooltip from "@mui/material/Tooltip";
+import { BsFullscreen } from "react-icons/bs";
+import { BsFullscreenExit } from "react-icons/bs";
+import Shorts from "./components/Shorts";
 
 const drawerWidth = 240;
 
@@ -86,6 +90,37 @@ export default function Sidenav() {
   const location = useLocation();
   const tokenState = localStorage.getItem("Token");
 
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const handleFullscreen = () => {
+    const element = document.documentElement; // Use document.documentElement for fullscreen on the entire document
+    if (!document.fullscreenElement) {
+      // Enter fullscreen
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen(); // Type assertion
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen(); // Type assertion
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen(); // Type assertion
+      }
+      setIsFullScreen(true);
+    } else {
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen(); // Type assertion
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen(); // Type assertion
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen(); // Type assertion
+      }
+      setIsFullScreen(false);
+    }
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -107,7 +142,41 @@ export default function Sidenav() {
             <Typography variant="h6" noWrap component="div">
               <img src="./youtube.png" height={40} alt="YouTube Logo" />
             </Typography>
-            <LogoutButton />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                marginLeft: "auto",
+                cursor: "pointer",
+              }}
+            >
+              {isFullScreen ? (
+                <BsFullscreenExit
+                  style={{
+                    color: "black",
+                    height: "25px",
+                    marginRight: "1rem",
+                    marginBottom: "0.2rem",
+                    width: "25px",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleFullscreen}
+                />
+              ) : (
+                <BsFullscreen
+                  style={{
+                    color: "black",
+                    height: "25px",
+                    marginRight: "2rem",
+                    marginBottom: "0.2rem",
+                    width: "25px",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleFullscreen}
+                />
+              )}
+              <LogoutButton />
+            </div>
           </Toolbar>
         </AppBar>
       )}
@@ -116,30 +185,52 @@ export default function Sidenav() {
           <Divider />
           <List sx={{ marginTop: "4rem" }}>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <Link to="/Products">
-                    <AiFillHome className="radius_icon" />
-                  </Link>
-                </ListItemIcon>
+              <ListItemButton
+                style={{
+                  backgroundColor:
+                    location.pathname === "/Products" ? "black" : "transparent",
+                }}
+              >
+                <Tooltip title="Products" arrow placement="right">
+                  <ListItemIcon>
+                    <Link to="/Products">
+                      <AiFillHome className="radius_icon" />
+                    </Link>
+                  </ListItemIcon>
+                </Tooltip>
                 <Link
                   to="/Products"
-                  style={{ color: "black", textDecoration: "none" }}
+                  style={{
+                    color:
+                      location.pathname === "/Products" ? "white" : "black",
+                    textDecoration: "none",
+                  }}
                 >
                   Products
                 </Link>
               </ListItemButton>
             </ListItem>
+
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <Link to="/Shorts">
-                    <AiFillVideoCamera className="radius_icon" />
-                  </Link>
-                </ListItemIcon>
+              <ListItemButton
+                style={{
+                  backgroundColor:
+                    location.pathname === "/Shorts" ? "black" : "transparent",
+                }}
+              >
+                <Tooltip title="Shorts" arrow placement="right">
+                  <ListItemIcon>
+                    <Link to="/Shorts">
+                      <AiFillVideoCamera className="radius_icon" />
+                    </Link>
+                  </ListItemIcon>
+                </Tooltip>
                 <Link
                   to="/Shorts"
-                  style={{ color: "black", textDecoration: "none" }}
+                  style={{
+                    color: location.pathname === "/Shorts" ? "white" : "black",
+                    textDecoration: "none",
+                  }}
                 >
                   Shorts
                 </Link>
