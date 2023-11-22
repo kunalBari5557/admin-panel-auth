@@ -11,8 +11,6 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import {
   deleteProductById,
   fetchProducts,

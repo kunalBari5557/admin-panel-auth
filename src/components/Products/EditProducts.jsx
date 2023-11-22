@@ -1,25 +1,17 @@
-import axios from "axios";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateProductById } from "../../redux/fetures/Products/Products";
 import { ProductUpdateSchema } from "../../ValidationSchema";
 import { Button, Grid, TextField } from "@mui/material";
+import { useState } from "react";
 
 const EditProducts = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const stateData = location.state;
   const Navigate = useNavigate();
-
-  const [selectedFile, setSelectedFile] = useState(null);
-  const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
 
   const productsEdit = useFormik({
     initialValues: {
